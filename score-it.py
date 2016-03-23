@@ -8,7 +8,7 @@ def connect():
     and a cursor object and raises eceptions if the connection cannot be made.
     """
     try:
-        conn = psycopg2.connect("dbname=score_it")
+        conn = psycopg2.connect("dbname = score_it")
     except psycopg2.DatabaseError:
         print "The program could not connect to the database!"
         sys.exit(1)
