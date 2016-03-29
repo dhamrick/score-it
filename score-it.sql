@@ -10,6 +10,7 @@ CREATE TABLE players
         player_id serial PRIMARY KEY,
         user_name text,
         email text,
+        address text,
         name text,
         UNIQUE (email, user_name)
     );
@@ -33,7 +34,7 @@ CREATE TABLE game_ownership
     );
 
 CREATE TABLE game_nights
-    -- Holds all of the game nights and who played
+    -- Holds all of the game nights, who played, and who hosted
     (
         game_night_id serial PRIMARY KEY,
         play_date timestamp DEFAULT current_timestamp,
@@ -41,12 +42,11 @@ CREATE TABLE game_nights
     );
 
 CREATE TABLE played_games
-    -- Holds which players played in which game
+    -- Records the games played at each game night and the players.
     (
         game_night_id serial REFERENCES game_nights(game_night_id),
-        game_name text,
-        player_id serial REFERENCES players(player_id)
-
+        game_id serial REFERENCES games(game_id),
+        player_id serial REFERENCES game_nights(player_id)
     );
 
 
