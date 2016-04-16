@@ -29,13 +29,17 @@ class GameOwnership (Base):
     id_game = Column(Integer, ForeignKey('games.id'))
 
 class GameNights (Base):
+    __tablename__ = 'game_nights'
     id = Column(Integer, primary_key = True)
     date = Column(Date, nullable = False)
     host = Column(Integer, ForeignKey('players.id'))
 
-class PlayedGames (Base):
+class GameStats (Base):
     id = Column(Integer, primary_key = True)
+    game_night = Column(Integer, ForeignKey = 'game_nights.id')
     id_game = Column(Integer, ForeignKey = 'games.id')
-    id_player = Column(Integer, ForeignKey = 'players.id')
+    player = Column(Integer, ForeignKey = 'players.id')
+    score = Column(Integer, nullable = False)
+
 
 
