@@ -1,0 +1,41 @@
+from sqlalchemy import Column, ForeignKey, Integer, String, Numeric
+from sqlalchemy import func
+from sqlalchemy.sql.expression import asc, desc
+from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy import create_engine
+
+Base = declarative_base()
+
+class Players (Base):
+    __tablename__ = 'players'
+    id = Column(Integer, primary_key = True)
+    user_name = Column(String(15), nullable = False, unique = True) )
+    name = Column(String(25), nullable = False)
+    email = Column(String(25), nullable = False, unique = True)
+    address = Column(String(80), nullable = True)
+
+class Games(Base):
+    __tablename__ = 'games'
+    id = Column(Integer, primary_key = True)
+    name = Column(String(25), nullable = False, unique = True)
+    game_type = Column(String(10), nullable = True)
+    players_max = Column(Integer, nullable = False)
+    player_min = Column(Integer, nullable = False)
+    difficulty = Column(String(15), nullable = True)
+
+class GameOwnership (Base):
+    __tablename__ = 'game_ownership'
+    id_player = Column(Integer, ForeignKey('players.id'))
+    id_game = Column(Integer, ForeignKey('games.id'))
+
+class GameNights (Base):
+    id = Column(Integer, primary_key = True)
+    date = Column(Date, nullable = False)
+    host = Column(Integer, ForeignKey('players.id'))
+
+class PlayedGames (Base):
+    id = Column(Integer, primary_key = True)
+    id_game = Column(Integer, ForeignKey = 'games.id')
+    id_player = Column(Integer, ForeignKey = 'players.id')
+
+
