@@ -1,5 +1,6 @@
 # score-it.py -- score keeper app
 
+import sqlalchemy
 import psycopg2
 import sys
 
